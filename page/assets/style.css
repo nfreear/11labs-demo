@@ -1,0 +1,17 @@
+
+button[ type = submit ] {
+  font-size: larger;
+  padding: .8rem 1.6rem;
+}
+
+input {
+  font-size: inherit;
+  min-width: 25rem;
+  padding: .4rem .1rem;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 36rem;
+  padding: 0 1rem;
+}

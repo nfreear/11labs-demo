@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <link rel="stylesheet" href="assets/style.css">
+
+  <title> Test </title>
+
+  <h1> Test </h1>
+
+<form>
+  <p>
+    <label>Audio URL
+      <input name="audioUrl" type="url" value="http://localhost:8181/audio/hello-nick.mp3" required>
+    </label>
+  </p>
+
+  <p>
+    <label>Output:
+      <output name="output">-</output>
+    </label>
+  </p>
+
+  <input name="apiKey" id="apiKey" type="hidden">
+  <my-local-storage selector="#apiKey" key="11Labs:apiKey"></my-local-storage>
+
+  <p>
+    <button type="submit">Transcribe</button>
+  </p>
+</form>
+
+<script type="importmap">
+{
+  "imports": {
+    "@elevenlabs/elevenlabs-js": "../node_modules/@elevenlabs/elevenlabs-js/index.d.ts",
+    "@elevenlabs/elevenlabs-js/": "../node_modules/@elevenlabs/elevenlabs-js/**/index.d.ts",
+    "dotenv/config": "../node_modules/dotenv/config.js",
+    "example": "../src/example.js",
+    "MyElements": "https://nfreear.github.io/elements/i.js",
+    "SpeechRecognizer": "../src/SpeechRecognizer.js",
+    "RecognizerApp": "../src/RecognizerApp.js"
+  },
+  "myElements": {
+    "use": [ "my-local-storage" ]
+  }
+}
+</script>
+
+
+<script type="XX_module">
+  import client from 'example';
+
+  console.debug('ASR:', client);
+</script>
+
+<script type="module">
+  import 'MyElements';
+  import 'RecognizerApp';
+</script>
+
+</html>

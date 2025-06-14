@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.2.0",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "servor": "^4.0.2"
+  },
+  "scripts": {
+    "start": "node scripts/httpServer.js",
+    "start:x": "servor",
+    "test:js": "node scripts/example.js > transcript.json",
+    "test:tsx": "npx tsx src/example.mts"
+  }
+}

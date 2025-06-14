@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <link rel="stylesheet" href="assets/style.css">
+
+  <title> Configuration </title>
+
+  <h1> Configuration </h1>
+
+  <form>
+    <p>
+      <label>
+        API key
+        <input name="apiKey" id="apiKey" type="password" required>
+        <my-local-storage selector="#apiKey" key="11Labs:apiKey"></my-local-storage>
+
+        <button type="button" name="toggle">Toggle</button>
+      </label>
+    </p>
+
+    <p>
+      <button type="submit">Store</button>
+    </p>
+  <form>
+
+<script type="importmap">
+{
+  "imports": {
+    "MyElements": "https://nfreear.github.io/elements/i.js"
+  },
+  "myElements": {
+        "use": [ "my-local-storage" ]
+  }
+}
+</script>
+
+
+<script type="module">
+  import 'MyElements';
+
+  const FORM = document.querySelector('form');
+  const toggleButton = FORM.elements.toggle;
+
+  let keyHidden = true;
+
+  FORM.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+
+    const apiKey = ev.target.elements.apiKey.value;
+
+    console.debug('Store:', apiKey, ev);
+  });
+
+  toggleButton.addEventListener('click', (ev) => {
+    ev.preventDefault();
+
+    FORM.elements.apiKey.type = keyHidden ? 'password' : 'text';
+    keyHidden = !keyHidden;
+
+    console.debug('Toggle:', keyHidden, ev);
+  });
+</script>
+
+</html>

@@ -1,0 +1,7 @@
+.DS_Store
+
+.env
+*.m4a
+transcript*
+package-lock.json
+node_modules
