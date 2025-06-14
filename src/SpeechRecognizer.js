@@ -2,11 +2,19 @@
 const { fetch, FormData, Request } = window;
 
 /**
+ * Minimal wrapper round the ElevenLabs speech-to-text API.
  *
  * @see https://elevenlabs.io/docs/api-reference/speech-to-text/convert
  * @see https://elevenlabs.io/docs/cookbooks/speech-to-text/quickstart
  */
 export class SpeechRecognizer {
+  constructor () {
+    this.dryRun = false;
+    this._options = {
+      model_id: 'scribe_v1'
+    }
+  }
+
   get apiKey () { return this._apiKey; }
 
   set apiKey (key) { this._apiKey = key; }
@@ -15,7 +23,7 @@ export class SpeechRecognizer {
 
   get apiUrl () { return 'https://api.elevenlabs.io/v1/speech-to-text'; }
 
-  get modelId () { return 'scribe_v1'; }
+  get modelId () { return this._options.model_id; }
 
   async _fetchAudioBlob (audioUrl, type = 'audio/mp3') {
     const response = await fetch(audioUrl);
@@ -26,7 +34,8 @@ export class SpeechRecognizer {
   _getFormData (audioBlob) {
     const formData = new FormData();
     formData.append('file', audioBlob);
-    formData.append('model_id', this.modelId);
+    // formData.append('model_id', this.modelId);
+    Object.entries(this._options).forEach(([ key, value ]) => formData.append(key, value));
     return formData;
   }
 
@@ -49,13 +58,14 @@ export class SpeechRecognizer {
 
   async fetchTranscript (audioUrl, type = 'audio/mp3') {
     const request = await this._createPostRequest(audioUrl, type);
-    console.debug('Request:', request);
-    // return;
+    if (this.dryRun) {
+      console.debug('API dry-run. Request:', request, this);
+      return { request };
+    }
     const response = await fetch(request);
     const data = await response.text();
-    console.assert(response.ok);
-    console.debug('API Response:', response.ok, response.status, response);
-    return { data, response };
+    console.assert(response.ok, `API Error: ${response.status}`);
+    return { data, response, request };
   }
 }
 

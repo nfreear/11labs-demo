@@ -6,6 +6,11 @@
 
   <h1> Configuration </h1>
 
+  <p>To get an ElevenLabs API key, <a href="https://elevenlabs.io/app/sign-up">sign up on their site</a>.</p>
+  <p>Access your <a href="https://elevenlabs.io/app/settings/api-keys">API Keys in settings</a>.</p>
+
+  <app-configuration>
+
   <form>
     <p>
       <label>
@@ -13,7 +18,7 @@
         <input name="apiKey" id="apiKey" type="password" required>
         <my-local-storage selector="#apiKey" key="11Labs:apiKey"></my-local-storage>
 
-        <button type="button" name="toggle">Toggle</button>
+        <button type="button" name="toggleButton">Toggle</button>
       </label>
     </p>
 
@@ -22,42 +27,24 @@
     </p>
   <form>
 
+  </app-configuration>
+
+
 <script type="importmap">
 {
   "imports": {
-    "MyElements": "https://nfreear.github.io/elements/i.js"
+    "MyElements": "https://nfreear.github.io/elements/i.js",
+    "AppConfigurationElement": "../src/AppConfigurationElement.js"
   },
   "myElements": {
-        "use": [ "my-local-storage" ]
+    "use": [ "my-local-storage" ]
   }
 }
 </script>
 
-
 <script type="module">
   import 'MyElements';
-
-  const FORM = document.querySelector('form');
-  const toggleButton = FORM.elements.toggle;
-
-  let keyHidden = true;
-
-  FORM.addEventListener('submit', (ev) => {
-    ev.preventDefault();
-
-    const apiKey = ev.target.elements.apiKey.value;
-
-    console.debug('Store:', apiKey, ev);
-  });
-
-  toggleButton.addEventListener('click', (ev) => {
-    ev.preventDefault();
-
-    FORM.elements.apiKey.type = keyHidden ? 'password' : 'text';
-    keyHidden = !keyHidden;
-
-    console.debug('Toggle:', keyHidden, ev);
-  });
+  import 'AppConfigurationElement';
 </script>
 
 </html>

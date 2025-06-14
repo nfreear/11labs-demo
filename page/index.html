@@ -6,7 +6,12 @@
 
   <h1> Test </h1>
 
+<recognizer-app>
+
 <form>
+  <p>
+    <label><input name="dryRun" type="checkbox" checked> Dry run?</label>
+  </p>
   <p>
     <label>Audio URL
       <input name="audioUrl" type="url" value="http://localhost:8181/audio/hello-nick.mp3" required>
@@ -27,13 +32,13 @@
   </p>
 </form>
 
+</recognizer-app>
+
+
 <script type="importmap">
 {
   "imports": {
     "@elevenlabs/elevenlabs-js": "../node_modules/@elevenlabs/elevenlabs-js/index.d.ts",
-    "@elevenlabs/elevenlabs-js/": "../node_modules/@elevenlabs/elevenlabs-js/**/index.d.ts",
-    "dotenv/config": "../node_modules/dotenv/config.js",
-    "example": "../src/example.js",
     "MyElements": "https://nfreear.github.io/elements/i.js",
     "SpeechRecognizer": "../src/SpeechRecognizer.js",
     "RecognizerApp": "../src/RecognizerApp.js"
@@ -42,13 +47,6 @@
     "use": [ "my-local-storage" ]
   }
 }
-</script>
-
-
-<script type="XX_module">
-  import client from 'example';
-
-  console.debug('ASR:', client);
 </script>
 
 <script type="module">
