@@ -6,24 +6,24 @@ const { fetch, FormData, Request } = window;
  *
  * @see https://elevenlabs.io/docs/api-reference/speech-to-text/convert
  * @see https://elevenlabs.io/docs/cookbooks/speech-to-text/quickstart
+ * @see https://elevenlabs.io/docs/capabilities/speech-to-text#faq - Audio formats.
  */
 export class SpeechRecognizer {
   constructor () {
     this.dryRun = false;
-    this._options = {
-      model_id: 'scribe_v1'
-    }
+    this._optionMap = new Map();
+    this._optionMap.set('model_id', 'scribe_v1');
   }
 
   get apiKey () { return this._apiKey; }
 
   set apiKey (key) { this._apiKey = key; }
 
-  set options (OPT) { this._options = OPT; }
+  get options () { return this._optionMap; }
 
   get apiUrl () { return 'https://api.elevenlabs.io/v1/speech-to-text'; }
 
-  get modelId () { return this._options.model_id; }
+  get modelId () { return this._optionMap.get('model_id'); }
 
   async _fetchAudioBlob (audioUrl, type = 'audio/mp3') {
     const response = await fetch(audioUrl);
@@ -34,8 +34,7 @@ export class SpeechRecognizer {
   _getFormData (audioBlob) {
     const formData = new FormData();
     formData.append('file', audioBlob);
-    // formData.append('model_id', this.modelId);
-    Object.entries(this._options).forEach(([ key, value ]) => formData.append(key, value));
+    this._optionMap.forEach((value, key) => formData.append(key, value));
     return formData;
   }
 
