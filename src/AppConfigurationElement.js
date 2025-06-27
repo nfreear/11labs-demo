@@ -1,4 +1,3 @@
-
 const { customElements, HTMLElement } = window;
 
 /**
@@ -6,7 +5,7 @@ const { customElements, HTMLElement } = window;
  *
  * @customElement app-configuration
  */
-class AppConfigurationElement extends HTMLElement {
+export class AppConfigurationElement extends HTMLElement {
   get _formElement () { return this.querySelector('form'); }
 
   get elements () { return this._formElement.elements; }
@@ -39,7 +38,7 @@ class AppConfigurationElement extends HTMLElement {
     this.elements.apiKey.type = this._keyHidden ? 'password' : 'text';
     this._keyHidden = !this._keyHidden;
 
-    console.debug('Toggle:', keyHidden, ev);
+    console.debug('Toggle:', this._keyHidden, ev);
   }
 }
 

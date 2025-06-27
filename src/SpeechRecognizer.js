@@ -1,4 +1,3 @@
-
 const { fetch, FormData, Request } = window;
 
 /**

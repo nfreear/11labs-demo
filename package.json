@@ -6,12 +6,15 @@
     "dotenv": "^16.5.0"
   },
   "devDependencies": {
+    "eslint": "^9.29.0",
     "live-server": "^1.2.2",
+    "neostandard": "^0.12.1",
     "servor": "^4.0.2"
   },
   "scripts": {
     "start": "node scripts/httpServer.js",
     "start:x": "servor",
+    "lint": "npx eslint",
     "test:js": "node scripts/example.js > transcript.json",
     "test:tsx": "npx tsx src/example.mts"
   }

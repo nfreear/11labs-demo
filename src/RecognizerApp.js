@@ -1,4 +1,3 @@
-
 import SpeechRecognizer from 'SpeechRecognizer';
 
 const { customElements, CustomEvent, HTMLElement } = window;
