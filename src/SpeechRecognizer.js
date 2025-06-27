@@ -3,6 +3,7 @@ const { fetch, FormData, Request } = window;
 /**
  * Minimal wrapper round the ElevenLabs speech-to-text API.
  *
+ * @copyright © Nick Freear, June-2025.
  * @see https://elevenlabs.io/docs/api-reference/speech-to-text/convert
  * @see https://elevenlabs.io/docs/cookbooks/speech-to-text/quickstart
  * @see https://elevenlabs.io/docs/capabilities/speech-to-text#faq - Audio formats.

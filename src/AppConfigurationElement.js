@@ -1,44 +1,45 @@
 const { customElements, HTMLElement } = window;
 
 /**
- * A form to store an API key to local storage.
+ * A form to store an API key to browser local storage.
  *
+ * @copyright © Nick Freear, June-2025.
  * @customElement app-configuration
  */
 export class AppConfigurationElement extends HTMLElement {
-  get _formElement () { return this.querySelector('form'); }
+  #keyHidden = true;
 
-  get elements () { return this._formElement.elements; }
+  get #formElement () { return this.querySelector('form'); }
 
-  get _toggleButton () { return this.elements.toggleButton; }
+  get #elements () { return this.#formElement.elements; }
+
+  get #toggleButton () { return this.#elements.toggleButton; }
 
   connectedCallback () {
-    console.assert(this._formElement, '<form> element not found');
-    console.assert(this._toggleButton, 'toggle button not found');
+    console.assert(this.#formElement, '<form> element not found');
+    console.assert(this.#toggleButton, 'toggle button not found');
 
-    this._keyHidden = true;
+    this.#formElement.addEventListener('submit', (ev) => this.#onSubmitEvent(ev));
+    this.#toggleButton.addEventListener('click', (ev) => this.#onClickEvent(ev));
 
-    this._formElement.addEventListener('submit', (ev) => this._onSubmitEvent(ev));
-    this._toggleButton.addEventListener('click', (ev) => this._onClickEvent(ev));
-
-    console.log('app-configuration:', this.elements);
+    console.log('app-configuration:', this.#elements);
   }
 
-  _onSubmitEvent (ev) {
+  #onSubmitEvent (ev) {
     ev.preventDefault();
 
-    const apiKey = this.elements.apiKey.value;
+    const apiKey = this.#elements.apiKey.value;
 
     console.debug('Store:', apiKey, ev);
   }
 
-  _onClickEvent (ev) {
+  #onClickEvent (ev) {
     ev.preventDefault();
 
-    this.elements.apiKey.type = this._keyHidden ? 'password' : 'text';
-    this._keyHidden = !this._keyHidden;
+    this.#elements.apiKey.type = this.#keyHidden ? 'password' : 'text';
+    this.#keyHidden = !this.#keyHidden;
 
-    console.debug('Toggle:', this._keyHidden, ev);
+    console.debug('Toggle:', this.#keyHidden, ev);
   }
 }
 
