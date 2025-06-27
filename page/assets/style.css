@@ -6,15 +6,20 @@
 }
 
 app-configuration,
+audio-recorder,
 recognizer-app {
   border: 1px solid silver;
   display: block;
   margin: 2rem 0;
-  padding: 0 1rem;
+  padding: .5rem 1rem 0;
 }
 
 [ data-app-working = true ] {
   cursor: wait;
+}
+
+::part(error) {
+  color: pink;
 }
 
 [ data-app-ok = false ] {
@@ -22,9 +27,10 @@ recognizer-app {
   border-color: red;
 }
 
+::part(button),
 button[ type = submit ] {
   font-size: larger;
-  padding: .8rem 1.6rem;
+  padding: .8rem 1rem;
 }
 
 button[ name = toggleButton ] {
